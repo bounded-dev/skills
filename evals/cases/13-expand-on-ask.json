@@ -1,0 +1,27 @@
+{
+  "name": "expand-on-ask",
+  "contracts": ["C9"],
+  "why": "The inverse of no-expansion. Asked directly, each item gains its destination and one action. Banner-shape and prose checks are relaxed for this case; the judge grades whether the detail actually arrived.",
+  "relax": ["count", "prose"],
+  "relax_why": "Expansion legitimately adds lines and prose the banner-shape checks would reject. The judge still grades whether each item is present, correctly coloured, and now carries its destination and action.",
+  "ask": "Now run /flight-status, and for each item expand it — tell me where it belongs and the one action that would save it.",
+  "setup": [
+    "printf '\\nexport const CACHE_TTL_S = 300;\\n' >> src/retry.ts"
+  ],
+  "seed": "We decided this session to cache upstream responses for five minutes, because the upstream rate limit is the real constraint. That reasoning is not written down anywhere. I also put the TTL constant into src/retry.ts, uncommitted.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🔴",
+        "about": "the five-minute caching decision, with a stated destination such as an ADR in docs/decisions/ and a concrete action to save it"
+      },
+      {
+        "dot": "🟠",
+        "about": "the TTL constant in src/retry.ts, with a concrete action such as committing and pushing it"
+      }
+    ],
+    "forbid": [
+      "any already-committed and pushed file"
+    ]
+  }
+}

@@ -28,6 +28,19 @@ The premise: **AI sessions are disposable, your project is not.** Before you clo
 
 → [`skills/flight-status`](skills/flight-status/SKILL.md)
 
+## Evals
+
+A skill is a prompt, so the only way to know a wording change hasn't broken it
+is to run it. [`evals/`](evals/) builds throwaway git repos, runs the skill
+against them headlessly, and grades what comes back — format and side effects
+deterministically, item detection and colour with an LLM judge.
+
+```bash
+python3 evals/run.py
+```
+
+Python stdlib only, nothing to install. See [`evals/README.md`](evals/README.md).
+
 ## Install
 
 A skill goes wherever your agent looks for one. For Claude Code that's `.claude/skills/` — user-level (`~/.claude/skills/`) for every project, or a repo's own `.claude/skills/` for just that one.

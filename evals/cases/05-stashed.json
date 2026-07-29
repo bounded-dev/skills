@@ -1,0 +1,21 @@
+{
+  "name": "stashed",
+  "contracts": ["C1", "C4"],
+  "why": "A stash leaves a clean `git status`, so it is the easiest orange surface to overlook entirely.",
+  "setup": [
+    "printf '\\nconst DEBUG_BYPASS = true;\\n' >> src/auth.ts",
+    "git stash push -q -m 'auth debug bypass experiment'"
+  ],
+  "seed": "I tried an auth debug bypass this session, decided not to keep it in the working tree, and stashed it. The tree looks clean now. Nothing else was agreed.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🟠",
+        "about": "the auth debug bypass experiment sitting in the git stash"
+      }
+    ],
+    "forbid": [
+      "uncommitted changes in the working tree — it is clean, the work is stashed"
+    ]
+  }
+}

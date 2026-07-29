@@ -1,0 +1,20 @@
+{
+  "name": "out-of-repo",
+  "contracts": ["C1", "C4"],
+  "why": "Files written outside the repo are invisible to every git command; the skill has to recall them from the session rather than detect them.",
+  "setup": [
+    "printf '# Migration notes\\n\\nDraft ordering for the schema migration.\\n' > /tmp/eval-migration-notes.md"
+  ],
+  "seed": "I drafted the schema migration notes this session and wrote them to /tmp/eval-migration-notes.md. They belong in docs/specs/, we are agreed on that and there is nothing further to decide — I simply have not moved them there yet. The repo itself is untouched: nothing edited, nothing committed.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🟠",
+        "about": "the migration notes draft written to /tmp, outside the repo"
+      }
+    ],
+    "forbid": [
+      "any git-tracked change — the repo is clean and fully pushed"
+    ]
+  }
+}

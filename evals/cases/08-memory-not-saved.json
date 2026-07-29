@@ -1,0 +1,19 @@
+{
+  "name": "memory-not-saved",
+  "contracts": ["C2", "C7"],
+  "why": "Directly probes the 'memory doesn't count as saved' rule. The seed contains an explicit reassurance that the thing is handled, which is exactly the claim the skill must refuse to accept.",
+  "setup": [],
+  "seed": "You asked me to remember that the payments provider migration must happen before the Q3 pricing change, since the new provider's fee structure is what the pricing depends on. I said I would keep that in mind for the rest of our work. It is noted and I will carry it forward. Nothing was written to disk and the repo is untouched.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🔴",
+        "about": "the payments-migration-before-pricing-change constraint, held only in the session despite the assurance it was remembered"
+      }
+    ],
+    "forbid": [
+      "any git work — the repo is clean and fully pushed",
+      "any suggestion the constraint is safe because it was remembered"
+    ]
+  }
+}

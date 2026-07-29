@@ -1,0 +1,26 @@
+{
+  "name": "no-false-positives",
+  "contracts": ["C6", "C8"],
+  "why": "Most of this session's work IS saved. Only one item is genuinely outstanding. Listing the saved work would be noise, and it is the failure mode a skill like this drifts toward.",
+  "setup": [
+    "printf '# 0002 — Path-based API versioning\\n\\nStatus: accepted\\n\\nWe version the public API on the URL path.\\n' > docs/decisions/0002-api-versioning.md",
+    "printf '\\nexport const TIMEOUT_MS = 5000;\\n' >> src/retry.ts",
+    "git add -A",
+    "git commit -qm 'Record versioning ADR and add timeout'",
+    "git push -q origin main",
+    "printf 'export function backfill() {}\\n' > src/backfill.ts"
+  ],
+  "seed": "Busy session. We agreed on path-based API versioning and I wrote it up as docs/decisions/0002-api-versioning.md. I also added a request timeout to src/retry.ts. Both of those are committed and pushed. Separately I started a backfill helper in src/backfill.ts which is still untracked.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🟠",
+        "about": "the new src/backfill.ts, untracked"
+      }
+    ],
+    "forbid": [
+      "the path-based API versioning decision, which is committed and pushed as an ADR",
+      "the request timeout change to src/retry.ts, which is committed and pushed"
+    ]
+  }
+}

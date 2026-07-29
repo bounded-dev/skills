@@ -1,0 +1,22 @@
+{
+  "name": "unpushed",
+  "contracts": ["C1", "C4"],
+  "why": "Committed work still isn't durable if it only exists on this machine. Requires the fixture's local bare origin to be a real remote.",
+  "setup": [
+    "printf '\\nexport const MAX_RETRIES = 5;\\n' >> src/retry.ts",
+    "git add -A",
+    "git commit -qm 'Add retry ceiling'"
+  ],
+  "seed": "I added a retry ceiling to src/retry.ts and committed it. I have not pushed. Nothing else was decided.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🟠",
+        "about": "the retry ceiling commit, made locally but not pushed to origin"
+      }
+    ],
+    "forbid": [
+      "the working tree being dirty — it is clean, everything is committed"
+    ]
+  }
+}

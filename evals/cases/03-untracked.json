@@ -1,0 +1,20 @@
+{
+  "name": "untracked",
+  "contracts": ["C1", "C4"],
+  "why": "An untracked file is invisible to `git diff` and easy to miss; it is still on-disk-not-landed.",
+  "setup": [
+    "printf 'export function rateLimit(req) {\\n  return true;\\n}\\n' > src/rate-limit.ts"
+  ],
+  "seed": "I wrote a new rate limiter in src/rate-limit.ts this session. It is a brand new file and I never ran git add. Nothing else happened.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🟠",
+        "about": "the new src/rate-limit.ts file, untracked and never added to git"
+      }
+    ],
+    "forbid": [
+      "any already-committed file"
+    ]
+  }
+}

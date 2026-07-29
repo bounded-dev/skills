@@ -1,0 +1,25 @@
+{
+  "name": "no-expansion",
+  "contracts": ["C9", "C6"],
+  "why": "Unasked, the output is a banner and nothing else — no per-item destination, no remediation steps, no closing summary. Layer 1 catches prose outside the banner; the judge catches expansion smuggled into the item lines.",
+  "setup": [
+    "printf '\\nexport const CACHE_TTL_S = 300;\\n' >> src/retry.ts"
+  ],
+  "seed": "We decided this session to cache upstream responses for five minutes, on the grounds that the upstream rate limit is the real constraint. That reasoning is not written down. I also put the TTL constant into src/retry.ts, uncommitted.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🔴",
+        "about": "the five-minute response caching decision and its rate-limit rationale, not written down"
+      },
+      {
+        "dot": "🟠",
+        "about": "the TTL constant added to src/retry.ts, uncommitted"
+      }
+    ],
+    "forbid": [
+      "step-by-step instructions for saving an item, such as a git command to run or a file to create",
+      "a closing summary, next-steps list, or offer of further help after the banner"
+    ]
+  }
+}

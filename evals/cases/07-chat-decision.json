@@ -1,0 +1,18 @@
+{
+  "name": "chat-decision",
+  "contracts": ["C2", "C4"],
+  "why": "The core red surface: a real decision reached in conversation with nothing on disk to show for it. The repo is spotless, so git tells the skill nothing.",
+  "setup": [],
+  "seed": "We spent this session working out how to version the public API. We settled on URL-path versioning (/v1/, /v2/) rather than an Accept header, because the CDN can route on the path without inspecting headers. We agreed it but did not write it down anywhere — no ADR, no issue, no code. Nothing in the repo was touched.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🔴",
+        "about": "the URL-path API versioning decision, agreed in conversation but not written into docs/decisions/ or any other store"
+      }
+    ],
+    "forbid": [
+      "any uncommitted, untracked, unpushed or stashed git work — the repo is clean and fully pushed"
+    ]
+  }
+}

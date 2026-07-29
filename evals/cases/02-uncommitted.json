@@ -1,0 +1,20 @@
+{
+  "name": "uncommitted",
+  "contracts": ["C1", "C4"],
+  "why": "The simplest orange surface: a tracked file modified in the working tree.",
+  "setup": [
+    "printf '\\nexport function refresh(token) {\\n  return rotate(token);\\n}\\n' >> src/auth.ts"
+  ],
+  "seed": "I added a token refresh helper to src/auth.ts this session. That is the only thing we did — no decisions to record, and I have not committed it.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🟠",
+        "about": "the token refresh edit to src/auth.ts, uncommitted in the working tree"
+      }
+    ],
+    "forbid": [
+      "docs/decisions/0001-postgres.md or any other already-committed file"
+    ]
+  }
+}

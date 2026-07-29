@@ -1,0 +1,29 @@
+{
+  "name": "mixed",
+  "contracts": ["C1", "C2", "C4"],
+  "why": "The realistic case. Both surfaces present at once, so the skill has to keep the two colours distinct rather than flattening everything into one severity.",
+  "setup": [
+    "printf '\\nexport const BACKOFF_CAP_MS = 30000;\\n' >> src/retry.ts",
+    "printf 'export function circuitBreaker(fn) {\\n  return fn;\\n}\\n' > src/circuit-breaker.ts"
+  ],
+  "seed": "Two things this session. First, we agreed that retries should use exponential backoff capped at 30 seconds, and that the cap belongs in config rather than hardcoded — that rationale has not been written down anywhere. Second, I edited src/retry.ts with the cap constant and created a new src/circuit-breaker.ts. Neither file is committed.",
+  "expect": {
+    "items": [
+      {
+        "dot": "🔴",
+        "about": "the exponential-backoff-capped-at-30s rationale and the config-not-hardcoded reasoning, never written down"
+      },
+      {
+        "dot": "🟠",
+        "about": "the edit to src/retry.ts, uncommitted"
+      },
+      {
+        "dot": "🟠",
+        "about": "the new src/circuit-breaker.ts, untracked"
+      }
+    ],
+    "forbid": [
+      "any already-committed and pushed file"
+    ]
+  }
+}

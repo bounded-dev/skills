@@ -1,0 +1,16 @@
+{
+  "name": "all-clear",
+  "contracts": ["C3", "C8"],
+  "why": "Clean tree, nothing ahead of origin, and the one decision discussed is already an ADR on disk. The skill must resist the pull to find something.",
+  "setup": [],
+  "seed": "We talked through the storage choice this session and confirmed the existing decision still holds — Postgres for primary storage, as already recorded in docs/decisions/0001-postgres.md. Nothing was changed and nothing new was agreed.",
+  "expect": {
+    "items": [
+      { "dot": "🟢", "about": "everything is captured; safe to close" }
+    ],
+    "forbid": [
+      "the Postgres storage decision, which is already recorded in docs/decisions/0001-postgres.md",
+      "any uncommitted, unpushed or stashed work — there is none"
+    ]
+  }
+}
