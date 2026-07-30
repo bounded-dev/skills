@@ -1,0 +1,29 @@
+{
+  "name": "scope-to-session",
+  "contracts": ["C6", "C8"],
+  "why": "git stash list and git log --branches --not --remotes surface a stash and an other-branch commit that predate this session. They are prior sessions' state, not this session's output, so the skill must exclude them — the noise the 'scope to this session' rule was added to cut. This session's own work is committed and pushed.",
+  "setup": [
+    "printf '\\nconst OLD_SPIKE = true;\\n' >> src/auth.ts",
+    "git stash push -q -m 'auth spike from an earlier session'",
+    "git checkout -q -b wip/old-feature",
+    "printf 'export const OLD = 1;\\n' > src/old-feature.ts",
+    "git add -A",
+    "git commit -qm 'WIP old feature'",
+    "git checkout -q main",
+    "printf '\\nexport const TIMEOUT_MS = 3000;\\n' >> src/retry.ts",
+    "git add -A",
+    "git commit -qm 'Add request timeout'",
+    "git push -q origin main"
+  ],
+  "seed": "This session I added a request timeout to src/retry.ts and pushed it. Separately, the git stash and the commit on branch wip/old-feature are both from earlier sessions — I did not touch either today.",
+  "expect": {
+    "items": [
+      { "dot": "🟢", "about": "everything is captured; safe to close" }
+    ],
+    "forbid": [
+      "the auth spike sitting in the git stash — a prior session's, not in flight this session",
+      "the WIP commit on branch wip/old-feature — unpushed, but a prior session's, not this session's",
+      "the request timeout on src/retry.ts, which is committed and pushed"
+    ]
+  }
+}

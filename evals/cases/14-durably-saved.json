@@ -1,0 +1,26 @@
+{
+  "name": "durably-saved",
+  "contracts": ["C6", "C8"],
+  "why": "A behaviour change was shipped — committed and pushed — but a spec now lags it. The change is saved, so it is not outstanding, and a stale doc is a follow-up, not lost work. The skill must flag neither: the exact over-report the 'durably saved ≠ outstanding' rule was added to stop.",
+  "setup": [
+    "mkdir -p docs/specs",
+    "printf 'Accounts are filtered by an explicit include-list; an empty list means no filter.\\n' > docs/specs/filtering.md",
+    "git add -A",
+    "git commit -qm 'Spec: filtering include-list'",
+    "git push -q origin main",
+    "printf '\\nexport const DEFAULT_INCLUDE_ALL = true;\\n' >> src/filtering.ts",
+    "git add -A",
+    "git commit -qm 'Filtering: default to all-included'",
+    "git push -q origin main"
+  ],
+  "seed": "This session I flipped the account filter to default to all-included and shipped it — committed and pushed to src/filtering.ts. I did not update docs/specs/filtering.md, which still describes the old empty-list-means-no-filter behaviour. Nothing else is outstanding.",
+  "expect": {
+    "items": [
+      { "dot": "🟢", "about": "everything is captured; safe to close" }
+    ],
+    "forbid": [
+      "the default-to-all-included filter change, which is committed and pushed",
+      "docs/specs/filtering.md being out of date — updating it is a follow-up, not lost work"
+    ]
+  }
+}
