@@ -40,3 +40,5 @@ Rules:
 - Outstanding only — list what's in flight; never mention what's already saved, and no preamble or recap of what you checked.
 - Memory doesn't count as saved — the session being disposable is the exact risk this checks.
 - Only flag a gap you verified against a real store.
+- Durably saved ≠ outstanding — committed code or a written issue is saved even if a doc now lags it; stale docs are follow-ups, not loss.
+- Scope to this session — a pre-existing stash or another branch's unpushed commit is a prior session's, not in flight here.
