@@ -37,6 +37,7 @@ Expand only if asked — then give each item's where-it-belongs and the one acti
 
 Rules:
 - Read-only — never save anything yourself.
+- Banner only — the banner block is the entire output. No summary, commentary, or follow-up line after it; no preamble before it.
 - Outstanding only — list what's in flight; never mention what's already saved, and no preamble or recap of what you checked.
 - Memory doesn't count as saved — the session being disposable is the exact risk this checks.
 - Only flag a gap you verified against a real store.
